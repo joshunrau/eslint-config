@@ -11,14 +11,16 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    "ecmaFeatures": {
-      "jsx": true
+    ecmaFeatures: {
+      jsx: true,
     },
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["import", "react", "@typescript-eslint"],
   rules: {
+    "import/exports-last": "warn",
+    "import/newline-after-import": "warn",
     "import/order": [
       "warn",
       {
@@ -37,5 +39,17 @@ module.exports = {
         pathGroupsExcludedImportTypes: ["react"],
       },
     ],
+  },
+  settings: {
+    "import/extensions": [".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/resolver": {
+      typescript: true,
+    },
+    react: {
+      version: "detect",
+    },
   },
 };
