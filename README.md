@@ -1,8 +1,19 @@
 # ESLint Config
 
-This repository houses my ESLint configurations for various project types. In all cases, the use of TypeScript is assumed and it is required to specify the path to the TSConfig file.
+## About
 
-## Extend the Base Config
+This repository houses my ESLint configurations for various types of TypeScript projects. 
+
+## Install
+
+```
+$ npx install-peerdeps --dev @joshunrau/eslint-config
+```
+
+## Usage
+In your `.eslintrc` file, you can extend either the base configuration provided in `src/index.js` or any of the other configurations in `src`, as shown in the examples below. As all configs rely on type-aware static analysis rules, you must specify `parserOptions.project` in your config. 
+
+**Extend the Base Config**
 
 ```json
 {
@@ -13,7 +24,7 @@ This repository houses my ESLint configurations for various project types. In al
 }
 ```
 
-## Extend Another Config
+**Extend The React Config**
 
 ```json
 {
