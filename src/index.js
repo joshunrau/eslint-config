@@ -15,7 +15,17 @@ module.exports = {
   plugins: ['import', '@typescript-eslint'],
   rules: {
     'import/exports-last': 'warn',
-    'import/newline-after-import': 'warn'
+    'import/newline-after-import': 'warn',
+    'import/order': [
+      'warn',
+      {
+        alphabetize: {
+          caseInsensitive: true,
+          order: 'asc'
+        },
+        'newlines-between': 'always'
+      }
+    ]
   },
   settings: {
     'import/extensions': ['.ts'],
