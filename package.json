@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "scripts/build.sh",
+    "format": "prettier --write .",
     "link": "npm run build && cd dist && npm link",
     "publish": "npm run build && cd dist && npm publish --access public"
   },
@@ -23,5 +24,8 @@
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.31.10"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
   }
 }

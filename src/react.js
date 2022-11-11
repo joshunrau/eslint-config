@@ -1,41 +1,41 @@
 module.exports = {
   env: {
-    browser: true,
+    browser: true
   },
-  extends: ["./index", "plugin:react/recommended"],
+  extends: ['./index', 'plugin:react/recommended'],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
-  plugins: ["react"],
+  plugins: ['react'],
   rules: {
-    "import/order": [
-      "warn",
+    'import/order': [
+      'warn',
       {
         alphabetize: {
           caseInsensitive: true,
-          order: "asc",
+          order: 'asc'
         },
-        "newlines-between": "always",
+        'newlines-between': 'always',
         pathGroups: [
           {
-            group: "external",
-            pattern: "react",
-            position: "before",
-          },
+            group: 'external',
+            pattern: 'react',
+            position: 'before'
+          }
         ],
-        pathGroupsExcludedImportTypes: ["react"],
-      },
-    ],
+        pathGroupsExcludedImportTypes: ['react']
+      }
+    ]
   },
   settings: {
-    "import/extensions": [".ts", ".tsx"],
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"],
+    'import/extensions': ['.ts', '.tsx'],
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
     },
     react: {
-      version: "detect",
-    },
-  },
+      version: 'detect'
+    }
+  }
 };
