@@ -10,7 +10,7 @@ This repository houses my ESLint configurations for various types of TypeScript 
 $ npx install-peerdeps --dev @joshunrau/eslint-config
 ```
 
-*Please note that this will install all peer dependencies, including those which may be unnecessary (e.g., `eslint-plugin-react` for a project that only uses the `node` config).*
+Please note that this will install all peer dependencies, including those which may be unnecessary (e.g., `eslint-plugin-react` for a project that only uses the `node` config).
 
 ## Usage
 
