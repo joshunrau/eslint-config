@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "scripts/build.sh",
-    "link": "cd dist && npm link",
+    "link": "npm run build && cd dist && npm link",
     "publish": "npm run build && cd dist && npm publish --access public"
   },
   "author": "Joshua Unrau",
