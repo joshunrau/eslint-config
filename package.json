@@ -1,5 +1,5 @@
 {
-  "name": "eslint-config",
+  "name": "eslint-config-joshunrau",
   "version": "1.0.0",
   "description": "ESLint Config",
   "main": "index.js",
@@ -7,13 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joshua Unrau",
+  "keywords": [
+    "eslint",
+    "eslintconfig"
+  ],
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
-    "eslint-plugin-react": "^7.31.10"
+    "@typescript-eslint/parser": "^5.42.1"
   },
   "peerDependencies": {
-    "eslint": "^8.27.0"
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "eslint": "^8.27.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-import-resolver-typescript": "^3.5.2"
   }
 }
