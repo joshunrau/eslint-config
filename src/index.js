@@ -18,6 +18,7 @@ module.exports = {
   rules: {
     'import/exports-last': 'warn',
     'import/newline-after-import': 'warn',
+    'import/no-default-export': 'warn',
     'import/order': [
       'warn',
       {
@@ -53,7 +54,8 @@ module.exports = {
             allowNumber: true,
             allowBoolean: true
           }
-        ]
+        ],
+        'import/consistent-type-specifier-style': 'warn'
       },
       settings: {
         'import/extensions': ['.ts'],
