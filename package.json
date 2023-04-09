@@ -1,6 +1,6 @@
 {
   "name": "@joshunrau/eslint-config",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "ESLint Config",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,11 @@
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.31.10"
+  },
+  "peerDependenciesMeta": {
+    "eslint-plugin-react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "prettier": "^2.7.1"
