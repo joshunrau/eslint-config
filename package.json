@@ -1,13 +1,13 @@
 {
   "name": "@joshunrau/eslint-config",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "ESLint Config",
   "main": "index.js",
   "scripts": {
     "build": "scripts/build.sh",
     "format": "prettier --write .",
-    "link": "npm run build && cd dist && npm link",
-    "publish": "npm run build && cd dist && npm publish --access public"
+    "link": "yarn build && cd dist && npm link",
+    "upload": "yarn build && cd dist && yarn publish"
   },
   "author": "Joshua Unrau",
   "keywords": [
