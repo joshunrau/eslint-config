@@ -2,12 +2,9 @@
   "name": "@joshunrau/eslint-config",
   "version": "1.0.7",
   "description": "ESLint Config",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "scripts/build.sh",
-    "format": "prettier --write .",
-    "link": "yarn build && cd dist && npm link",
-    "upload": "yarn build && cd dist && yarn publish"
+    "format": "prettier --write src"
   },
   "author": "Joshua Unrau",
   "keywords": [
@@ -15,22 +12,10 @@
     "eslintconfig"
   ],
   "license": "MIT",
-  "dependencies": {
-    "@typescript-eslint/parser": "^5.42.1"
-  },
-  "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "eslint": "^8.27.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-react": "^7.31.10"
-  },
-  "peerDependenciesMeta": {
-    "eslint-plugin-react": {
-      "optional": true
-    }
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.8"
   }
 }
