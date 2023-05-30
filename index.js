@@ -1,9 +1,20 @@
 // @ts-check
 
-import { baseConfig } from './lib/base.js';
-import { jsxConfig } from './lib/jsx.js';
-import { tsConfig } from './lib/ts.js';
+import { createBaseConfig } from './lib/base.js';
+import { createJsxConfig } from './lib/jsx.js';
+import { createTsConfig } from './lib/ts.js';
 
-const defaultConfig = [baseConfig, jsxConfig, tsConfig];
+/**
+ *
+ * @param {Object} options
+ * @param {Object} options.typescript
+ * @param {string} options.typescript.project
+ */
+export function createConfig(options) {
+  return [
+    createBaseConfig(),
+    createJsxConfig(),
+    createTsConfig(options.typescript)
+  ];
+}
 
-export { defaultConfig as default, baseConfig, jsxConfig, tsConfig };
