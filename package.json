@@ -4,6 +4,13 @@
   "description": "ESLint Config",
   "main": "index.js",
   "type": "module",
+  "files": [
+    "lib/*",
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json"
+  ],
   "scripts": {
     "format": "prettier --write src"
   },

@@ -1,8 +1,8 @@
 // @ts-check
 
-import { baseConfig } from './lib/base';
-import { jsxConfig } from './lib/jsx';
-import { tsConfig } from './lib/ts';
+import { baseConfig } from './lib/base.js';
+import { jsxConfig } from './lib/jsx.js';
+import { tsConfig } from './lib/ts.js';
 
 const defaultConfig = [baseConfig, jsxConfig, tsConfig];
 
