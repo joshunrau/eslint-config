@@ -1,31 +1,49 @@
-import js from '@eslint/js';
-import ts from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
-import perfectionistNatural from 'eslint-plugin-perfectionist/configs/recommended-natural';
-import react from 'eslint-plugin-react';
-import globals from 'globals';
-
 /**
- * @param {Object} options
- * @param {boolean} options.jsx
- * @param {string} options.project
- * @returns {Promise<{import('eslint').Linter.FlatConfig>}
+ * @typedef {import('eslint').Linter.FlatConfig} FlatConfig
  */
-export const createConfig = (options) => {
-  return [
-    {
+
+import perfectionistNatural from 'eslint-plugin-perfectionist/configs/recommended-natural';
+import globals from 'globals';
+import js from '@eslint/js';
+import reactPlugin from 'eslint-plugin-react';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+
+export class ConfigFactory {
+  /**
+   * @param {Object} options
+   * @param {string} options.project
+   * @param {'browser' | 'node' | 'shared-node-browser'} [options.env]
+   * @param {boolean} [options.jsx]
+   * @returns {FlatConfig[]}
+   */
+  static create(options) {
+    return [this.#createBase(options), this.#createJsx(), this.#createTs(options), perfectionistNatural];
+  }
+
+  /**
+   * @param {Object} [options]
+   * @param {'browser' | 'node' | 'shared-node-browser'} [options.env]
+   * @returns {FlatConfig}
+   */
+  static #createBase(options) {
+    return {
       files: ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'],
       languageOptions: {
         ecmaVersion: 'latest',
         globals: {
-          ...globals['shared-node-browser']
+          ...globals[options?.env ?? 'shared-node-browser']
         }
       },
       rules: {
         ...js.configs.recommended.rules
       }
-    },
-    {
+    };
+  }
+
+  /** @returns {FlatConfig} */
+  static #createJsx() {
+    return {
       files: ['**/*.jsx', '**/*.tsx'],
       languageOptions: {
         globals: {
@@ -38,10 +56,10 @@ export const createConfig = (options) => {
         }
       },
       plugins: {
-        react
+        react: reactPlugin
       },
       rules: {
-        ...react.configs.recommended.rules,
+        ...reactPlugin.configs.recommended.rules,
         'react/function-component-definition': [
           'error',
           {
@@ -57,26 +75,35 @@ export const createConfig = (options) => {
           version: 'detect'
         }
       }
-    },
-    {
+    };
+  }
+
+  /**
+   * @param {Object} options
+   * @param {string} options.project
+   * @param {boolean} [options.jsx]
+   * @returns {FlatConfig}
+   */
+  static #createTs(options) {
+    return {
       files: ['**/*.ts', '**/*.tsx'],
       languageOptions: {
         parser: tsParser,
         parserOptions: {
           ecmaFeatures: {
-            jsx: options.jsx
+            jsx: options?.jsx
           },
           project: options.project,
           sourceType: 'module'
         }
       },
       plugins: {
-        '@typescript-eslint': ts
+        '@typescript-eslint': tsPlugin
       },
       rules: {
-        ...ts.configs['eslint-recommended'].rules,
-        ...ts.configs['recommended'].rules,
-        ...ts.configs['recommended-requiring-type-checking'].rules,
+        ...tsPlugin.configs['eslint-recommended'].rules,
+        ...tsPlugin.configs['recommended'].rules,
+        ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -89,7 +116,6 @@ export const createConfig = (options) => {
           }
         ]
       }
-    },
-    perfectionistNatural
-  ];
-};
+    };
+  }
+}
