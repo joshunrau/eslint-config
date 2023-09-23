@@ -41,7 +41,21 @@ export const createConfig = (options) => {
         react
       },
       rules: {
-        ...react.configs.recommended.rules
+        ...react.configs.recommended.rules,
+        'react/function-component-definition': [
+          'error',
+          {
+            namedComponents: 'arrow-function',
+            unnamedComponents: 'arrow-function'
+          }
+        ],
+        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 'off'
+      },
+      settings: {
+        react: {
+          version: 'detect'
+        }
       }
     },
     {
@@ -62,7 +76,18 @@ export const createConfig = (options) => {
       rules: {
         ...ts.configs['eslint-recommended'].rules,
         ...ts.configs['recommended'].rules,
-        ...ts.configs['recommended-requiring-type-checking'].rules
+        ...ts.configs['recommended-requiring-type-checking'].rules,
+        '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/restrict-plus-operands': 'off',
+        '@typescript-eslint/restrict-template-expressions': [
+          'error',
+          {
+            allowNumber: true,
+            allowBoolean: true
+          }
+        ]
       }
     },
     perfectionistNatural
