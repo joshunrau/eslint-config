@@ -17,7 +17,8 @@
     "format": "prettier --write src"
   },
   "dependencies": {
-    "@eslint/js": "^8.50.0"
+    "@eslint/js": "^8.50.0",
+    "globals": "^13.22.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
