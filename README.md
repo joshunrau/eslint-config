@@ -3,5 +3,5 @@
 ## Install
 
 ```shell
-bun add --dev @joshunrau/eslint-config
+bun add --d @joshunrau/eslint-config eslint
 ```

@@ -1,12 +1,14 @@
 // @ts-check
 
 import js from '@eslint/js';
+import globals from 'globals';
 
 /** @type {import('eslint').Linter.FlatConfig} */
-const baseConfig = {
+export const baseConfig = {
   files: ['**/*.js', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'],
   languageOptions: {
-    ecmaVersion: 'latest'
+    ecmaVersion: 'latest',
+    globals: globals['shared-node-browser']
   },
   rules: js.configs.recommended.rules
 };
