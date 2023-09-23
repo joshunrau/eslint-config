@@ -1,3 +1,1 @@
-import config from './src/index.js';
-
-export default config;
+export { default } from './src/index.js';
