@@ -32,44 +32,52 @@ const createBase = ({ base }: ConfigOptions): FlatConfig => ({
   }
 });
 
-const createJsx = (): FlatConfig => {
-  return {
-    files: ['**/*.jsx', '**/*.tsx'],
-    languageOptions: {
-      globals: {
-        ...globals.browser
+const createJsx = (): FlatConfig[] => {
+  return [
+    {
+      files: ['**/*.jsx', '**/*.tsx'],
+      languageOptions: {
+        globals: {
+          ...globals.browser
+        },
+        parserOptions: {
+          ecmaFeatures: {
+            jsx: true
+          }
+        }
       },
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true
+      plugins: {
+        'jsx-a11y': jsxA11yPlugin,
+        react: reactPlugin
+      },
+      rules: {
+        ...reactPlugin.configs.recommended.rules,
+        ...jsxA11yPlugin.configs.recommended.rules,
+        'no-alert': 'error',
+        'no-console': ['error', { allow: ['warn', 'error'] }],
+        'react/function-component-definition': [
+          'error',
+          {
+            namedComponents: 'arrow-function',
+            unnamedComponents: 'arrow-function'
+          }
+        ],
+        'react/prop-types': 'off',
+        'react/react-in-jsx-scope': 'off'
+      },
+      settings: {
+        react: {
+          version: 'detect'
         }
       }
     },
-    plugins: {
-      'jsx-a11y': jsxA11yPlugin,
-      react: reactPlugin
-    },
-    rules: {
-      ...reactPlugin.configs.recommended.rules,
-      ...jsxA11yPlugin.configs.recommended.rules,
-      'no-alert': 'error',
-      'no-console': ['error', { allow: ['warn', 'error'] }],
-      'react/function-component-definition': [
-        'error',
-        {
-          namedComponents: 'arrow-function',
-          unnamedComponents: 'arrow-function'
-        }
-      ],
-      'react/prop-types': 'off',
-      'react/react-in-jsx-scope': 'off'
-    },
-    settings: {
-      react: {
-        version: 'detect'
+    {
+      files: ['**/*.stories.jsx', '**/*.stories.tsx'],
+      rules: {
+        'no-alert': 'off'
       }
     }
-  };
+  ];
 };
 
 const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
@@ -146,7 +154,7 @@ const createPerfectionist = (): FlatConfig => {
 
 const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [createBase(options)];
-  if (options.jsx) config.push(createJsx());
+  if (options.jsx) config.push(...createJsx());
   if (options.ts) config.push(createTypeScript(options));
   config.push(createPerfectionist());
   return config;
