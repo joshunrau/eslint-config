@@ -4,7 +4,7 @@ import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
-import perfectionistNatural from 'eslint-plugin-perfectionist/configs/recommended-natural';
+import perfectionist from 'eslint-plugin-perfectionist';
 import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
 
@@ -53,6 +53,8 @@ const createJsx = (): FlatConfig => {
     rules: {
       ...reactPlugin.configs.recommended.rules,
       ...jsxA11yPlugin.configs.recommended.rules,
+      'no-alert': 'error',
+      'no-console': ['error', { allow: ['warn', 'error'] }],
       'react/function-component-definition': [
         'error',
         {
@@ -89,7 +91,7 @@ const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
     },
     rules: {
       ...tsPlugin.configs['eslint-recommended'].rules,
-      ...tsPlugin.configs['recommended'].rules,
+      ...tsPlugin.configs.recommended.rules,
       ...tsPlugin.configs['recommended-type-checked'].rules,
       ...tsPlugin.configs['stylistic-type-checked'].rules,
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
@@ -106,11 +108,48 @@ const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
   };
 };
 
+const createPerfectionist = (): FlatConfig => {
+  return {
+    plugins: {
+      perfectionist
+    },
+    rules: {
+      ...perfectionist.configs['recommended-natural'].rules,
+      'perfectionist/sort-imports': [
+        'error',
+        {
+          'custom-groups': {
+            type: {
+              react: ['react', 'react-dom/*']
+            },
+            value: {
+              react: ['react', 'react-dom/*']
+            }
+          },
+          groups: [
+            'react',
+            ['builtin', 'builtin-type'],
+            ['external', 'external-type'],
+            ['internal', 'internal-type'],
+            ['index', 'sibling', 'parent'],
+            'type',
+            'style',
+            'unknown'
+          ],
+          'internal-pattern': ['@/**'],
+          'newlines-between': 'always',
+          type: 'natural'
+        }
+      ]
+    }
+  };
+};
+
 const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [createBase(options)];
   if (options.jsx) config.push(createJsx());
   if (options.ts) config.push(createTypeScript(options));
-  config.push(perfectionistNatural);
+  config.push(createPerfectionist());
   return config;
 };
 

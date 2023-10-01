@@ -1,5 +1,7 @@
-declare module 'eslint-plugin-perfectionist/configs/recommended-natural' {
-  import { type ESLint, Linter } from 'eslint';
-  export const rules: Linter.RulesRecord;
-  export const plugins: Record<string, ESLint.Plugin>;
+declare module 'eslint-plugin-perfectionist' {
+  import { Linter } from 'eslint';
+  export const configs: {
+    [key: string]: Linter.Config;
+    ['recommended-natural']: Linter.Config;
+  };
 }
