@@ -15,7 +15,7 @@ type ConfigOptions = {
   ts?: {
     project: string;
   };
-}
+};
 
 type FlatConfig = Linter.FlatConfig;
 
@@ -87,9 +87,9 @@ const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
     rules: {
       ...tsPlugin.configs['eslint-recommended'].rules,
       ...tsPlugin.configs['recommended'].rules,
-      ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
+      ...tsPlugin.configs['recommended-type-checked'].rules,
+      ...tsPlugin.configs['stylistic-type-checked'].rules,
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/restrict-plus-operands': 'off',
       '@typescript-eslint/restrict-template-expressions': [
