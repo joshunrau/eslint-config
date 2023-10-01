@@ -1,6 +1,6 @@
 {
   "name": "@joshunrau/eslint-config",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "ESLint Config",
   "keywords": [
     "eslint",
@@ -18,7 +18,8 @@
   "scripts": {
     "build": "tsc",
     "format": "prettier --write src",
-    "lint": "eslint --fix src"
+    "lint": "eslint --fix src",
+    "push": "tsc && npm publish"
   },
   "dependencies": {
     "@eslint/js": "^8.50.0",
