@@ -11,5 +11,7 @@ bun add --dev @joshunrau/eslint-config eslint
 **eslint.config.js**
 
 ```javascript
-export { default } from '@joshunrau/eslint-config';
+import { createConfig } from '@joshunrau/eslint-config';
+
+export default createConfig();
 ```
