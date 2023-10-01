@@ -1,8 +1,7 @@
-import type { ESLint, Linter } from 'eslint';
-
 import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import type { ESLint, Linter } from 'eslint';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
 import reactPlugin from 'eslint-plugin-react';
