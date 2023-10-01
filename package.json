@@ -9,12 +9,15 @@
   "license": "MIT",
   "author": "Joshua Unrau",
   "type": "module",
-  "main": "src/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "src"
+    "dist"
   ],
   "scripts": {
-    "format": "prettier --write src"
+    "build": "tsc",
+    "format": "prettier --write src",
+    "lint": "eslint --fix src"
   },
   "dependencies": {
     "@eslint/js": "^8.50.0",
@@ -28,10 +31,17 @@
     "@types/eslint": "^8.44.2",
     "@types/eslint__js": "^8.42.1",
     "eslint": "^8.50.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "eslint": "8.x"
+    "eslint": "8.x",
+    "typescript": "5.x"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"

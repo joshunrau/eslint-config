@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext"],
     "module": "NodeNext",
+    "moduleDetection": "force",
+    "outDir": "dist",
     "moduleResolution": "NodeNext",
-    "removeComments": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
   },
   "include": ["src"]
 }
