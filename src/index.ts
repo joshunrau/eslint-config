@@ -3,7 +3,7 @@ import type { ESLint, Linter } from 'eslint';
 import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
-import a11yPlugin from 'eslint-plugin-jsx-a11y';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import perfectionistNatural from 'eslint-plugin-perfectionist/configs/recommended-natural';
 import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
@@ -47,10 +47,12 @@ const createJsx = (): FlatConfig => {
       }
     },
     plugins: {
+      'jsx-a11y': jsxA11yPlugin,
       react: reactPlugin
     },
     rules: {
       ...reactPlugin.configs.recommended.rules,
+      ...jsxA11yPlugin.configs.recommended.rules,
       'react/function-component-definition': [
         'error',
         {
