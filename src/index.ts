@@ -147,16 +147,24 @@ const createPerfectionist = (): FlatConfig => {
           'newlines-between': 'always',
           type: 'natural'
         }
+      ],
+      'perfectionist/sort-jsx-props': [
+        'error',
+        {
+          'custom-groups': {
+            callback: 'on*'
+          },
+          groups: ['shorthand', 'unknown', 'callback'],
+          order: 'asc',
+          type: 'natural'
+        }
       ]
     }
   };
 };
 
 const createConfig = (options: ConfigOptions = {}) => {
-  const config: FlatConfig[] = [
-    { ignores: ['build/*', 'dist/*'] },
-    createBase(options)
-  ];
+  const config: FlatConfig[] = [{ ignores: ['build/*', 'dist/*'] }, createBase(options)];
   if (options.jsx) config.push(...createJsx());
   if (options.ts) config.push(createTypeScript(options));
   config.push(createPerfectionist());
