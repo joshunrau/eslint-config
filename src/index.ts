@@ -3,6 +3,7 @@ import type { ESLint, Linter } from 'eslint';
 import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import a11yPlugin from 'eslint-plugin-jsx-a11y';
 import perfectionistNatural from 'eslint-plugin-perfectionist/configs/recommended-natural';
 import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
