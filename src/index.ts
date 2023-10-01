@@ -153,7 +153,10 @@ const createPerfectionist = (): FlatConfig => {
 };
 
 const createConfig = (options: ConfigOptions = {}) => {
-  const config: FlatConfig[] = [createBase(options)];
+  const config: FlatConfig[] = [
+    { ignores: ['build/*', 'dist/*'] },
+    createBase(options)
+  ];
   if (options.jsx) config.push(...createJsx());
   if (options.ts) config.push(createTypeScript(options));
   config.push(createPerfectionist());
