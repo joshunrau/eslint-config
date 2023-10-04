@@ -15,7 +15,7 @@ const filesFactory = (files: string[], root?: string) => {
   if (!root) {
     return files;
   }
-  return files.map((file) => path.resolve(root, file));
+  return files.map((file) => path.join(root, file));
 };
 
 export type ConfigOptions = {
