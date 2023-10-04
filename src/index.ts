@@ -7,7 +7,9 @@ import perfectionist from 'eslint-plugin-perfectionist';
 import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
 
-type ConfigOptions = {
+type FlatConfig = Linter.FlatConfig;
+
+export type ConfigOptions = {
   base?: {
     env?: 'browser' | 'node' | 'shared-node-browser';
   };
@@ -17,9 +19,7 @@ type ConfigOptions = {
   };
 };
 
-type FlatConfig = Linter.FlatConfig;
-
-const createBase = ({ base }: ConfigOptions): FlatConfig => ({
+export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
   files: ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'],
   languageOptions: {
     ecmaVersion: 'latest',
@@ -32,7 +32,7 @@ const createBase = ({ base }: ConfigOptions): FlatConfig => ({
   }
 });
 
-const createJsx = (): FlatConfig[] => {
+export const createJsx = (): FlatConfig[] => {
   return [
     {
       files: ['**/*.jsx', '**/*.tsx'],
@@ -80,7 +80,7 @@ const createJsx = (): FlatConfig[] => {
   ];
 };
 
-const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
+export const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
   return {
     files: jsx ? ['**/*.ts', '**/*.tsx'] : ['**/*.ts'],
     languageOptions: {
@@ -115,7 +115,7 @@ const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
   };
 };
 
-const createPerfectionist = (): FlatConfig => {
+export const createPerfectionist = (): FlatConfig => {
   return {
     plugins: {
       perfectionist
@@ -163,7 +163,7 @@ const createPerfectionist = (): FlatConfig => {
   };
 };
 
-const createConfig = (options: ConfigOptions = {}) => {
+export const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [{ ignores: ['build/*', 'dist/*'] }, createBase(options)];
   if (options.jsx) config.push(...createJsx());
   if (options.ts) config.push(createTypeScript(options));
@@ -171,4 +171,3 @@ const createConfig = (options: ConfigOptions = {}) => {
   return config;
 };
 
-export { type ConfigOptions, createConfig };
