@@ -1,3 +1,5 @@
+import path from 'path';
+
 import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
@@ -9,9 +11,17 @@ import globals from 'globals';
 
 type FlatConfig = Linter.FlatConfig;
 
+const filesFactory = (files: string[], root?: string) => {
+  if (!root) {
+    return files;
+  }
+  return files.map((file) => path.resolve(root, file));
+};
+
 export type ConfigOptions = {
   base?: {
     env?: 'browser' | 'node' | 'shared-node-browser';
+    filesRoot?: string;
   };
   jsx?: boolean;
   ts?: {
@@ -20,7 +30,7 @@ export type ConfigOptions = {
 };
 
 export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
-  files: ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'],
+  files: filesFactory(['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'], base?.filesRoot),
   languageOptions: {
     ecmaVersion: 'latest',
     globals: {
@@ -32,10 +42,10 @@ export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
   }
 });
 
-export const createJsx = (): FlatConfig[] => {
+export const createJsx = ({ base }: ConfigOptions): FlatConfig[] => {
   return [
     {
-      files: ['**/*.jsx', '**/*.tsx'],
+      files: filesFactory(['**/*.jsx', '**/*.tsx'], base?.filesRoot),
       languageOptions: {
         globals: {
           ...globals.browser
@@ -72,7 +82,7 @@ export const createJsx = (): FlatConfig[] => {
       }
     },
     {
-      files: ['**/*.stories.jsx', '**/*.stories.tsx'],
+      files: filesFactory(['**/*.stories.jsx', '**/*.stories.tsx'], base?.filesRoot),
       rules: {
         'no-alert': 'off'
       }
@@ -80,9 +90,9 @@ export const createJsx = (): FlatConfig[] => {
   ];
 };
 
-export const createTypeScript = ({ jsx, ts }: ConfigOptions): FlatConfig => {
+export const createTypeScript = ({ base, jsx, ts }: ConfigOptions): FlatConfig => {
   return {
-    files: jsx ? ['**/*.ts', '**/*.tsx'] : ['**/*.ts'],
+    files: filesFactory(jsx ? ['**/*.ts', '**/*.tsx'] : ['**/*.ts'], base?.filesRoot),
     languageOptions: {
       parser: tsParser as Linter.ParserModule,
       parserOptions: {
@@ -165,9 +175,8 @@ export const createPerfectionist = (): FlatConfig => {
 
 export const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [{ ignores: ['build/*', 'dist/*'] }, createBase(options)];
-  if (options.jsx) config.push(...createJsx());
+  if (options.jsx) config.push(...createJsx(options));
   if (options.ts) config.push(createTypeScript(options));
   config.push(createPerfectionist());
   return config;
 };
-
