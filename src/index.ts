@@ -121,6 +121,7 @@ export const createTypeScript = ({ base, jsx, ts }: ConfigOptions): FlatConfig =
           allowNumber: true
         }
       ],
+      'no-redeclare': 'off',
       'no-undef': 'off'
     }
   };
