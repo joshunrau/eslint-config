@@ -42,45 +42,10 @@ export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
   }
 });
 
-export const createTypeScript = ({ base, jsx, ts }: ConfigOptions): FlatConfig => {
-  return {
-    files: filesFactory(jsx ? ['**/*.ts', '**/*.tsx'] : ['**/*.ts'], base?.filesRoot),
-    languageOptions: {
-      parser: tsParser as Linter.ParserModule,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx
-        },
-        project: ts?.project,
-        sourceType: 'module'
-      }
-    },
-    plugins: {
-      '@typescript-eslint': tsPlugin as Record<string, ESLint.Plugin>
-    },
-    rules: {
-      ...tsPlugin.configs['eslint-recommended'].rules,
-      ...tsPlugin.configs.recommended.rules,
-      ...tsPlugin.configs['recommended-type-checked'].rules,
-      ...tsPlugin.configs['stylistic-type-checked'].rules,
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/restrict-plus-operands': 'off',
-      '@typescript-eslint/restrict-template-expressions': [
-        'error',
-        {
-          allowBoolean: true,
-          allowNumber: true
-        }
-      ]
-    }
-  };
-};
-
-export const createJsx = ({ base }: ConfigOptions): FlatConfig[] => {
+export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
   return [
     {
-      files: filesFactory(['**/*.jsx', '**/*.tsx'], base?.filesRoot),
+      files: filesFactory(ts ? ['**/*.jsx', '**/*.tsx'] : ['**/*.jsx'], base?.filesRoot),
       languageOptions: {
         globals: {
           ...globals.browser
@@ -123,6 +88,42 @@ export const createJsx = ({ base }: ConfigOptions): FlatConfig[] => {
       }
     }
   ];
+};
+
+export const createTypeScript = ({ base, jsx, ts }: ConfigOptions): FlatConfig => {
+  return {
+    files: filesFactory(jsx ? ['**/*.ts', '**/*.tsx'] : ['**/*.ts'], base?.filesRoot),
+    languageOptions: {
+      parser: tsParser as Linter.ParserModule,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx
+        },
+        project: ts?.project,
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin as Record<string, ESLint.Plugin>
+    },
+    rules: {
+      ...tsPlugin.configs['eslint-recommended'].rules,
+      ...tsPlugin.configs.recommended.rules,
+      ...tsPlugin.configs['recommended-type-checked'].rules,
+      ...tsPlugin.configs['stylistic-type-checked'].rules,
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/restrict-plus-operands': 'off',
+      '@typescript-eslint/restrict-template-expressions': [
+        'error',
+        {
+          allowBoolean: true,
+          allowNumber: true
+        }
+      ],
+      'no-undef': 'off'
+    }
+  };
 };
 
 export const createPerfectionist = (): FlatConfig => {
@@ -175,8 +176,8 @@ export const createPerfectionist = (): FlatConfig => {
 
 export const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [{ ignores: ['build/*', 'dist/*'] }, createBase(options)];
-  if (options.ts) config.push(createTypeScript(options));
   if (options.jsx) config.push(...createJsx(options));
+  if (options.ts) config.push(createTypeScript(options));
   config.push(createPerfectionist());
   return config;
 };
