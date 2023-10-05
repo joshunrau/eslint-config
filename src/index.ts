@@ -3,6 +3,7 @@ import path from 'path';
 import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import astroParser from 'astro-eslint-parser';
 import type { ESLint, Linter } from 'eslint';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
@@ -19,6 +20,7 @@ const filesFactory = (files: string[], root?: string) => {
 };
 
 export type ConfigOptions = {
+  astro?: boolean;
   base?: {
     env?: 'browser' | 'node' | 'shared-node-browser';
     filesRoot?: string;
@@ -90,7 +92,7 @@ export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
   ];
 };
 
-export const createTypeScript = ({ base, jsx, ts }: ConfigOptions): FlatConfig => {
+export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatConfig => {
   return {
     files: filesFactory(jsx ? ['**/*.ts', '**/*.tsx'] : ['**/*.ts'], base?.filesRoot),
     languageOptions: {
@@ -99,6 +101,7 @@ export const createTypeScript = ({ base, jsx, ts }: ConfigOptions): FlatConfig =
         ecmaFeatures: {
           jsx
         },
+        extraFileExtensions: astro ? ['.astro'] : undefined,
         project: ts?.project,
         sourceType: 'module'
       }
@@ -123,6 +126,18 @@ export const createTypeScript = ({ base, jsx, ts }: ConfigOptions): FlatConfig =
       ],
       'no-redeclare': 'off',
       'no-undef': 'off'
+    }
+  };
+};
+
+export const createAstro = (): FlatConfig => {
+  return {
+    files: ['*.astro'],
+    languageOptions: {
+      parser: astroParser as Linter.ParserModule,
+      parserOptions: {
+        parser: tsParser
+      }
     }
   };
 };
@@ -179,6 +194,7 @@ export const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [{ ignores: ['build/*', 'dist/*'] }, createBase(options)];
   if (options.jsx) config.push(...createJsx(options));
   if (options.ts) config.push(createTypeScript(options));
+  if (options.astro) config.push(createAstro());
   config.push(createPerfectionist());
   return config;
 };
