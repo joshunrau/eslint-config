@@ -92,42 +92,54 @@ export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
   ];
 };
 
-export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatConfig => {
-  return {
-    files: filesFactory(jsx ? ['**/*.ts', '**/*.tsx'] : ['**/*.ts'], base?.filesRoot),
-    languageOptions: {
-      parser: tsParser as Linter.ParserModule,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx
-        },
-        extraFileExtensions: astro ? ['.astro'] : undefined,
-        project: ts?.project,
-        sourceType: 'module'
+export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatConfig[] => {
+  return [
+    {
+      files: filesFactory(['**/*.ts', '**/*.tsx'], base?.filesRoot),
+      languageOptions: {
+        parser: tsParser as Linter.ParserModule,
+        parserOptions: {
+          ecmaFeatures: {
+            jsx
+          },
+          extraFileExtensions: astro ? ['.astro'] : undefined,
+          project: ts?.project,
+          sourceType: 'module'
+        }
+      },
+      plugins: {
+        '@typescript-eslint': tsPlugin as Record<string, ESLint.Plugin>
+      },
+      rules: {
+        ...tsPlugin.configs['eslint-recommended'].rules,
+        ...tsPlugin.configs.recommended.rules,
+        ...tsPlugin.configs['recommended-type-checked'].rules,
+        ...tsPlugin.configs['stylistic-type-checked'].rules,
+        '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/restrict-plus-operands': 'off',
+        '@typescript-eslint/restrict-template-expressions': [
+          'error',
+          {
+            allowBoolean: true,
+            allowNumber: true
+          }
+        ],
+        'no-redeclare': 'off',
+        'no-undef': 'off'
       }
     },
-    plugins: {
-      '@typescript-eslint': tsPlugin as Record<string, ESLint.Plugin>
-    },
-    rules: {
-      ...tsPlugin.configs['eslint-recommended'].rules,
-      ...tsPlugin.configs.recommended.rules,
-      ...tsPlugin.configs['recommended-type-checked'].rules,
-      ...tsPlugin.configs['stylistic-type-checked'].rules,
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/restrict-plus-operands': 'off',
-      '@typescript-eslint/restrict-template-expressions': [
-        'error',
-        {
-          allowBoolean: true,
-          allowNumber: true
-        }
-      ],
-      'no-redeclare': 'off',
-      'no-undef': 'off'
+    {
+      files: filesFactory(['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'], base?.filesRoot),
+      rules: {
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off'
+      }
     }
-  };
+  ];
 };
 
 export const createAstro = (): FlatConfig => {
@@ -193,7 +205,7 @@ export const createPerfectionist = (): FlatConfig => {
 export const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [{ ignores: ['build/*', 'dist/*'] }, createBase(options)];
   if (options.jsx) config.push(...createJsx(options));
-  if (options.ts) config.push(createTypeScript(options));
+  if (options.ts) config.push(...createTypeScript(options));
   if (options.astro) config.push(createAstro());
   config.push(createPerfectionist());
   return config;
