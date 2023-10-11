@@ -161,6 +161,26 @@ export const createPerfectionist = (): FlatConfig => {
     },
     rules: {
       ...perfectionist.configs['recommended-natural'].rules,
+      'perfectionist/sort-classes': [
+        'error',
+        {
+          groups: [
+            'index-signature',
+            'static-property',
+            'property',
+            'private-property',
+            'constructor',
+            'static-method',
+            'static-private-method',
+            ['get-method', 'set-method'],
+            'method',
+            'private-method',
+            'unknown'
+          ],
+          order: 'asc',
+          type: 'natural'
+        }
+      ],
       'perfectionist/sort-imports': [
         'error',
         {
