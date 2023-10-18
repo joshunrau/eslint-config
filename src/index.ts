@@ -132,6 +132,7 @@ export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatC
     {
       files: filesFactory(['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'], base?.filesRoot),
       rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-unsafe-argument': 'off',
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',
