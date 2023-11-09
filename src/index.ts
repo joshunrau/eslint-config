@@ -12,18 +12,18 @@ import globals from 'globals';
 
 type FlatConfig = Linter.FlatConfig;
 
-const filesFactory = (files: string[], root?: string) => {
-  if (!root) {
+const filesFactory = (files: string[], roots?: string[]) => {
+  if (!roots) {
     return files;
   }
-  return files.map((file) => path.join(root, file));
+  return roots.flatMap((root) => files.map((file) => path.join(root, file)));
 };
 
 export type ConfigOptions = {
   astro?: boolean;
   base?: {
     env?: 'browser' | 'node' | 'shared-node-browser';
-    filesRoot?: string;
+    fileRoots?: string[];
   };
   jsx?: boolean;
   ts?: {
@@ -32,7 +32,7 @@ export type ConfigOptions = {
 };
 
 export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
-  files: filesFactory(['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'], base?.filesRoot),
+  files: filesFactory(['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'], base?.fileRoots),
   languageOptions: {
     ecmaVersion: 'latest',
     globals: {
@@ -47,7 +47,7 @@ export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
 export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
   return [
     {
-      files: filesFactory(ts ? ['**/*.jsx', '**/*.tsx'] : ['**/*.jsx'], base?.filesRoot),
+      files: filesFactory(ts ? ['**/*.jsx', '**/*.tsx'] : ['**/*.jsx'], base?.fileRoots),
       languageOptions: {
         globals: {
           ...globals.browser
@@ -84,7 +84,7 @@ export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
       }
     },
     {
-      files: filesFactory(['**/*.stories.jsx', '**/*.stories.tsx'], base?.filesRoot),
+      files: filesFactory(['**/*.stories.jsx', '**/*.stories.tsx'], base?.fileRoots),
       rules: {
         'no-alert': 'off'
       }
@@ -95,7 +95,7 @@ export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
 export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatConfig[] => {
   return [
     {
-      files: filesFactory(['**/*.ts', '**/*.tsx'], base?.filesRoot),
+      files: filesFactory(['**/*.ts', '**/*.tsx'], base?.fileRoots),
       languageOptions: {
         parser: tsParser as Linter.ParserModule,
         parserOptions: {
@@ -130,7 +130,7 @@ export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatC
       }
     },
     {
-      files: filesFactory(['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'], base?.filesRoot),
+      files: filesFactory(['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'], base?.fileRoots),
       rules: {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-unsafe-argument': 'off',
