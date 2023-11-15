@@ -143,12 +143,13 @@ export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatC
   ];
 };
 
-export const createAstro = (): FlatConfig => {
+export const createAstro = ({ base }: ConfigOptions): FlatConfig => {
   return {
-    files: ['*.astro'],
+    files: filesFactory(['*.astro'], base?.fileRoots),
     languageOptions: {
       parser: astroParser as Linter.ParserModule,
       parserOptions: {
+        extraFileExtensions: ['.astro'],
         parser: tsParser
       }
     }
@@ -227,7 +228,7 @@ export const createConfig = (options: ConfigOptions = {}) => {
   const config: FlatConfig[] = [{ ignores: ['build/*', 'dist/*'] }, createBase(options)];
   if (options.jsx) config.push(...createJsx(options));
   if (options.ts) config.push(...createTypeScript(options));
-  if (options.astro) config.push(createAstro());
+  if (options.astro) config.push(createAstro(options));
   config.push(createPerfectionist());
   return config;
 };
