@@ -122,7 +122,8 @@ export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatC
           'error',
           {
             allowBoolean: true,
-            allowNumber: true
+            allowNumber: true,
+            allowNever: true
           }
         ],
         'no-redeclare': 'off',
