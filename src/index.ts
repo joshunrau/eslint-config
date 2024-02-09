@@ -116,14 +116,15 @@ export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatC
         ...tsPlugin.configs['recommended-type-checked'].rules,
         ...tsPlugin.configs['stylistic-type-checked'].rules,
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+        "@typescript-eslint/no-explicit-any": "off",
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/restrict-plus-operands': 'off',
         '@typescript-eslint/restrict-template-expressions': [
           'error',
           {
             allowBoolean: true,
+            allowNever: true,
             allowNumber: true,
-            allowNever: true
           }
         ],
         'no-redeclare': 'off',
