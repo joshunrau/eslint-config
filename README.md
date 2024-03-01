@@ -3,7 +3,7 @@
 ## Install
 
 ```shell
-bun add --dev @joshunrau/eslint-config eslint
+pnpm add -D @joshunrau/eslint-config eslint
 ```
 
 ## Usage
