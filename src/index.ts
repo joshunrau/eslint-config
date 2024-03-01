@@ -23,7 +23,7 @@ export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
   }
 });
 
-export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
+export const createJsx = ({ ts }: ConfigOptions): FlatConfig[] => {
   return [
     {
       files: ts ? ['**/*.jsx', '**/*.tsx'] : ['**/*.jsx'],
@@ -71,7 +71,7 @@ export const createJsx = ({ base, ts }: ConfigOptions): FlatConfig[] => {
   ];
 };
 
-export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatConfig[] => {
+export const createTypeScript = ({ astro, jsx, ts }: ConfigOptions): FlatConfig[] => {
   return [
     {
       files: ['**/*.ts', '**/*.tsx'],
