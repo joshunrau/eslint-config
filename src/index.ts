@@ -4,31 +4,17 @@ import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import astroParser from 'astro-eslint-parser';
-import type { ESLint, Linter } from 'eslint';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
 import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
-
-type FlatConfig = Linter.FlatConfig;
+import type { ConfigOptions, FlatConfig, ESLint, Linter } from './types.js';
 
 const filesFactory = (files: string[], roots?: string[]) => {
   if (!roots) {
     return files;
   }
   return roots.flatMap((root) => files.map((file) => path.join(root, file)));
-};
-
-export type ConfigOptions = {
-  astro?: boolean;
-  base?: {
-    env?: 'browser' | 'node' | 'shared-node-browser';
-    fileRoots?: string[];
-  };
-  jsx?: boolean;
-  ts?: {
-    project: string;
-  };
 };
 
 export const createBase = ({ base }: ConfigOptions): FlatConfig => ({
@@ -116,7 +102,7 @@ export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatC
         ...tsPlugin.configs['recommended-type-checked'].rules,
         ...tsPlugin.configs['stylistic-type-checked'].rules,
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-        "@typescript-eslint/no-explicit-any": "off",
+        '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/restrict-plus-operands': 'off',
         '@typescript-eslint/restrict-template-expressions': [
@@ -124,7 +110,7 @@ export const createTypeScript = ({ astro, base, jsx, ts }: ConfigOptions): FlatC
           {
             allowBoolean: true,
             allowNever: true,
-            allowNumber: true,
+            allowNumber: true
           }
         ],
         'no-redeclare': 'off',
