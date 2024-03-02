@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "checkJs": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,5 +15,6 @@
     "target": "ESNext",
     "verbatimModuleSyntax": true
   },
-  "include": ["src/**/*"]
+  "include": ["eslint.config.js", "prettier.config.js", "src/**/*", "typings/*.d.ts"],
+  "exclude": ["node_modules"]
 }

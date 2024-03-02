@@ -1,15 +1,18 @@
-import path from 'path';
-import url from 'url';
+import { config } from './src/index.js';
 
-import { createConfig } from './dist/index.js';
+export default config();
+// import path from 'path';
+// import url from 'url';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+// import { createConfig } from './src/index.js';
 
-export default createConfig({
-  base: {
-    env: 'node'
-  },
-  ts: {
-    project: path.resolve(__dirname, 'tsconfig.json')
-  }
-});
+// const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+
+// export default createConfig({
+//   base: {
+//     env: 'node'
+//   },
+//   ts: {
+//     project: path.resolve(__dirname, 'tsconfig.json')
+//   }
+// });
