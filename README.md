@@ -11,7 +11,7 @@ pnpm add -D @joshunrau/eslint-config eslint
 **eslint.config.js**
 
 ```javascript
-import { createConfig } from '@joshunrau/eslint-config';
+import { config } from '@joshunrau/eslint-config';
 
-export default createConfig();
+export default config();
 ```
