@@ -15,3 +15,23 @@ import { config } from '@joshunrau/eslint-config';
 
 export default config();
 ```
+
+## VSCode
+
+**settings.json**
+
+```json
+{
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc"
+  ]
+}
+```

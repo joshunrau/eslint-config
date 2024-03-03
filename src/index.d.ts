@@ -18,7 +18,10 @@ declare type Options = {
   };
   json?: {
     enabled: boolean;
-    sortPackageJson: boolean;
+    sort: {
+      packageJson: boolean;
+      tsconfig: boolean;
+    };
   };
   perfectionist?: {
     enabled: boolean;

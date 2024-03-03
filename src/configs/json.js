@@ -48,7 +48,7 @@ export const jsonConfig = async ({ json }) => {
       }
     }
   ];
-  if (json.sortPackageJson) {
+  if (json.sort.packageJson) {
     configs.push({
       files: ['**/package.json'],
       rules: {
@@ -120,6 +120,20 @@ export const jsonConfig = async ({ json }) => {
           {
             order: ['types', 'import', 'require', 'default'],
             pathPattern: '^exports.*$'
+          }
+        ]
+      }
+    });
+  }
+  if (json.sort.tsconfig) {
+    configs.push({
+      files: ['**/jsconfig.json', '**/tsconfig.json', '**/tsconfig.*.json'],
+      rules: {
+        'jsonc/sort-keys': [
+          'warn',
+          {
+            order: ['extends', 'compilerOptions', 'references', 'files', 'include', 'exclude'],
+            pathPattern: '^$'
           }
         ]
       }
