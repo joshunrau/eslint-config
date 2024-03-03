@@ -13,6 +13,9 @@ declare type Options = {
     node?: boolean;
   };
   exclude?: string[];
+  jsdoc?: {
+    enabled: boolean;
+  };
   perfectionist?: {
     enabled: boolean;
   };

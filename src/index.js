@@ -12,6 +12,7 @@ import { typescriptConfig } from './configs/typescript.js';
 export const config = async ({
   env = { browser: true, es2021: true, node: true },
   exclude = [],
+  jsdoc = { enabled: false },
   perfectionist = { enabled: true },
   react = { enabled: false },
   typescript = { enabled: true }
@@ -19,7 +20,9 @@ export const config = async ({
   /** @type {ESLintConfig.FlatConfig[][]} */
   const items = [];
   items.push(await baseConfig({ env, exclude }));
-  items.push(await jsdocConfig({ typescript }));
+  if (jsdoc.enabled) {
+    items.push(await jsdocConfig({ typescript }));
+  }
   if (perfectionist.enabled) {
     items.push(await perfectionistConfig());
   }
