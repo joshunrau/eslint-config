@@ -16,6 +16,10 @@ declare type Options = {
   jsdoc?: {
     enabled: boolean;
   };
+  json?: {
+    enabled: boolean;
+    sortPackageJson: boolean;
+  };
   perfectionist?: {
     enabled: boolean;
   };

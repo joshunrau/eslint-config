@@ -1,5 +1,6 @@
 import { baseConfig } from './configs/base.js';
 import { jsdocConfig } from './configs/jsdoc.js';
+import { jsonConfig } from './configs/json.js';
 import { perfectionistConfig } from './configs/perfectionist.js';
 import { reactConfig } from './configs/react.js';
 import { typescriptConfig } from './configs/typescript.js';
@@ -13,6 +14,7 @@ export const config = async ({
   env = { browser: true, es2021: true, node: true },
   exclude = [],
   jsdoc = { enabled: false },
+  json = { enabled: true, sortPackageJson: true },
   perfectionist = { enabled: true },
   react = { enabled: false },
   typescript = { enabled: true }
@@ -22,6 +24,9 @@ export const config = async ({
   items.push(await baseConfig({ env, exclude }));
   if (jsdoc.enabled) {
     items.push(await jsdocConfig({ typescript }));
+  }
+  if (json.enabled) {
+    items.push(await jsonConfig({ json }));
   }
   if (perfectionist.enabled) {
     items.push(await perfectionistConfig());
