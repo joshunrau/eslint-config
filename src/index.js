@@ -1,4 +1,5 @@
 import { baseConfig } from './configs/base.js';
+import { jsdocConfig } from './configs/jsdoc.js';
 import { perfectionistConfig } from './configs/perfectionist.js';
 import { reactConfig } from './configs/react.js';
 import { typescriptConfig } from './configs/typescript.js';
@@ -18,6 +19,7 @@ export const config = async ({
   /** @type {ESLintConfig.FlatConfig[][]} */
   const items = [];
   items.push(await baseConfig({ env, exclude }));
+  items.push(await jsdocConfig({ typescript }));
   if (perfectionist.enabled) {
     items.push(await perfectionistConfig());
   }
