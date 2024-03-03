@@ -1,14 +1,14 @@
 {
   "name": "@joshunrau/eslint-config",
+  "type": "module",
   "version": "4.0.0",
   "description": "ESLint Config",
+  "author": "Joshua Unrau",
+  "license": "MIT",
   "keywords": [
     "eslint",
     "eslintconfig"
   ],
-  "license": "MIT",
-  "author": "Joshua Unrau",
-  "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "files": [
@@ -18,6 +18,15 @@
     "format": "prettier --write src",
     "lint": "tsc && eslint --fix src",
     "push": "pnpm lint && npm publish"
+  },
+  "peerDependencies": {
+    "eslint": "8.x",
+    "typescript": "5.x"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   },
   "dependencies": {
     "eslint-plugin-jsdoc": "^48.2.0",
@@ -35,15 +44,6 @@
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
-  },
-  "peerDependencies": {
-    "eslint": "8.x",
-    "typescript": "5.x"
-  },
-  "peerDependenciesMeta": {
-    "typescript": {
-      "optional": true
-    }
   },
   "publishConfig": {
     "access": "public"
