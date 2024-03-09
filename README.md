@@ -13,7 +13,17 @@ pnpm add -D @joshunrau/eslint-config eslint
 ```javascript
 import { config } from '@joshunrau/eslint-config';
 
-export default config();
+// These are the defaults, override as needed depending on project
+export default config({
+  env: { browser: true, es2021: true, node: true },
+  exclude: [],
+  jsdoc: { enabled: false },
+  json: { enabled: true, sort: { packageJson: true, tsconfig: true } },
+  perfectionist: { enabled: true },
+  react: { enabled: false },
+  typescript: { enabled: true }
+});
+
 ```
 
 ## VSCode
