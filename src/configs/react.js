@@ -1,6 +1,6 @@
 /**
- * @param {Required<Pick<ESLintConfig.Options, "typescript">>} options
- * @returns {Promise<ESLintConfig.FlatConfig[]>}
+ * @param {Required<Pick<import('../index.js').Options, "typescript">>} options
+ * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
 export const reactConfig = async ({ typescript }) => {
   const { default: jsxA11yPlugin } = await import('eslint-plugin-jsx-a11y');

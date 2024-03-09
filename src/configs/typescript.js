@@ -1,6 +1,6 @@
 /**
- * @param {Required<Pick<ESLintConfig.Options, "react">>} options
- * @returns {Promise<ESLintConfig.FlatConfig[]>}
+ * @param {Required<Pick<import('../index.js').Options, "react">>} options
+ * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
 export const typescriptConfig = async ({ react }) => {
   const { parser, plugin } = await import('typescript-eslint');

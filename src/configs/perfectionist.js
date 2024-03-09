@@ -1,5 +1,5 @@
 /**
- * @returns {Promise<ESLintConfig.FlatConfig[]>}
+ * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
 export const perfectionistConfig = async () => {
   const { default: perfectionistPlugin } = await import('eslint-plugin-perfectionist');

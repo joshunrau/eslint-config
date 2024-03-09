@@ -1,20 +1,24 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "checkJs": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "lib": ["ESNext"],
     "maxNodeModuleJsDepth": 0,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "noEmit": true,
+    "outDir": "lib",
     "resolveJsonModule": true,
+    "rootDir": "src",
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext",
     "verbatimModuleSyntax": true
   },
-  "include": ["eslint.config.js", "prettier.config.js", "src/**/*", "typings/*.d.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "typings/*.d.ts"]
 }
