@@ -20,8 +20,8 @@ export const reactConfig = async ({ typescript }) => {
         react: reactPlugin
       },
       rules: {
-        ...reactPlugin.configs.recommended.rules,
-        ...jsxA11yPlugin.configs.recommended.rules,
+        ...reactPlugin.configs['recommended']?.rules,
+        ...jsxA11yPlugin.configs['recommended']?.rules,
         'no-alert': 'error',
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'react/function-component-definition': [
