@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/joshunrau/eslint-config/compare/v4.1.0...v4.2.0) (2024-03-30)
+
+
+### Features
+
+* add astro and type checking ([278993f](https://github.com/joshunrau/eslint-config/commit/278993fa4f45f455c701dfecc0c48557f3113277))
+
 ## [4.1.0](https://github.com/joshunrau/eslint-config/compare/v4.0.3...v4.1.0) (2024-03-30)
 
 
