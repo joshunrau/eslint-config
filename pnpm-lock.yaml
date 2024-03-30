@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^19.1.0
     version: 19.1.0
   '@joshunrau/prettier-config':
-    specifier: ^0.2.1
-    version: 0.2.1(husky@9.0.11)(prettier@3.2.5)
+    specifier: ^0.3.0
+    version: 0.3.0(husky@9.0.11)(prettier@3.2.5)
   '@joshunrau/semantic-release':
     specifier: ^0.1.0
     version: 0.1.0(@commitlint/cli@19.2.1)(@commitlint/config-conventional@19.1.0)(husky@9.0.11)(typescript@5.4.3)
@@ -360,9 +360,9 @@ packages:
     resolution:
       { integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw== }
 
-  /@joshunrau/prettier-config@0.2.1(husky@9.0.11)(prettier@3.2.5):
+  /@joshunrau/prettier-config@0.3.0(husky@9.0.11)(prettier@3.2.5):
     resolution:
-      { integrity: sha512-vO4DQhJI5oaFVO0T0lKi4beYrT1dThFWzYdMYJjoUY8C7biDZj/i2MksKYDUkHI5gETZ2H5QNOgKPaFgSG7Ltw== }
+      { integrity: sha512-Umj1zWdIStAvXNybBfd5oXwvqBsQFyi8R+9WJ4iOXikiZMSVO4qaw4xWRUIvRE6o006u+uJtHQwlIWQNSdeZCg== }
     hasBin: true
     peerDependencies:
       husky: 9.x
