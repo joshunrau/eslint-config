@@ -70,6 +70,7 @@
       "@commitlint/config-conventional"
     ]
   },
+  "prettier": "@joshunrau/prettier-config",
   "release": {
     "extends": [
       "@joshunrau/semantic-release"
