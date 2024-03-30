@@ -1,10 +1,14 @@
+import { filesFactory } from '../utils.js';
+
 /**
+ * @param {Pick<import('../index.js').Options, "fileRoots">} options
  * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
-export const perfectionistConfig = async () => {
+export const perfectionistConfig = async ({ fileRoots }) => {
   const { default: perfectionistPlugin } = await import('eslint-plugin-perfectionist');
   return [
     {
+      files: filesFactory(['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'], fileRoots),
       plugins: {
         perfectionist: perfectionistPlugin
       },
@@ -49,6 +53,7 @@ export const perfectionistConfig = async () => {
               ['index', 'sibling', 'parent'],
               'type',
               'style',
+              ['side-effect', 'side-effect-style'],
               'unknown'
             ],
             'internal-pattern': ['@/**'],

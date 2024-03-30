@@ -1,3 +1,4 @@
+import { astroConfig } from './configs/astro.js';
 import { baseConfig } from './configs/base.js';
 import { jsdocConfig } from './configs/jsdoc.js';
 import { jsonConfig } from './configs/json.js';
@@ -6,15 +7,19 @@ import { reactConfig } from './configs/react.js';
 import { typescriptConfig } from './configs/typescript.js';
 
 /** @typedef {import('eslint').Linter.FlatConfig} FlatConfig */
+/** @typedef {FlatConfig | FlatConfig[] | Promise<FlatConfig> | Promise<FlatConfig[]>} ConfigDef */
 
 /**
  * User configuration options for ESLint
  * @typedef {object} Options
+ * @property {object} [astro]
+ * @property {boolean} astro.enabled
  * @property {object} [env]
  * @property {boolean} [env.browser]
  * @property {boolean} [env.es2021]
  * @property {boolean} [env.node]
  * @property {string[]} [exclude]
+ * @property {string[]} [fileRoots]
  * @property {object} [jsdoc]
  * @property {boolean} jsdoc.enabled
  * @property {object} [json]
@@ -23,9 +28,10 @@ import { typescriptConfig } from './configs/typescript.js';
  * @property {boolean} json.sort.packageJson
  * @property {boolean} json.sort.tsconfig
  * @property {object} [perfectionist]
- * @property {boolean} [perfectionist.enabled]
+ * @property {boolean} perfectionist.enabled
  * @property {object} [react]
  * @property {boolean} react.enabled
+ * @property {string} [react.version]
  * @property {object} [typescript]
  * @property {boolean} typescript.enabled
  */
@@ -33,36 +39,46 @@ import { typescriptConfig } from './configs/typescript.js';
 /**
  * Create an array of eslint config objects based on the provided options
  * @param {Options} options
+ * @param {...ConfigDef} args
  * @returns {Promise<FlatConfig[]>}
  */
-export const config = async ({
-  env = { browser: true, es2021: true, node: true },
-  exclude = [],
-  jsdoc = { enabled: false },
-  json = { enabled: true, sort: { packageJson: true, tsconfig: true } },
-  perfectionist = { enabled: true },
-  react = { enabled: false },
-  typescript = { enabled: true }
-} = {}) => {
-  /** @type {FlatConfig[][]} */
+export const config = async (
+  {
+    astro = { enabled: false },
+    env = { browser: true, es2021: true, node: true },
+    exclude = [],
+    fileRoots = undefined,
+    jsdoc = { enabled: false },
+    json = { enabled: true, sort: { packageJson: true, tsconfig: true } },
+    perfectionist = { enabled: true },
+    react = { enabled: false, version: 'detect' },
+    typescript = { enabled: true }
+  } = {},
+  ...args
+) => {
+  /** @type {ConfigDef[]} */
   const items = [];
-  items.push(await baseConfig({ env, exclude }));
+  items.push(baseConfig({ env, exclude, fileRoots }));
+  if (astro.enabled) {
+    items.push(astroConfig({ fileRoots, typescript }));
+  }
   if (jsdoc.enabled) {
-    items.push(await jsdocConfig({ typescript }));
+    items.push(jsdocConfig({ fileRoots, typescript }));
   }
   if (json.enabled) {
-    items.push(await jsonConfig({ json }));
+    items.push(jsonConfig({ fileRoots, json }));
   }
   if (perfectionist.enabled) {
-    items.push(await perfectionistConfig());
+    items.push(perfectionistConfig({ fileRoots }));
   }
   if (react.enabled) {
-    items.push(await reactConfig({ typescript }));
+    items.push(reactConfig({ fileRoots, react, typescript }));
   }
   if (typescript.enabled) {
-    items.push(await typescriptConfig({ react }));
+    items.push(typescriptConfig({ fileRoots, react }));
   }
-  return items.flat();
+  items.push(...args);
+  return (await Promise.all(items)).flat();
 };
 
 export default config();

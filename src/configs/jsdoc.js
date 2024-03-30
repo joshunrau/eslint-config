@@ -1,13 +1,15 @@
+import { filesFactory } from '../utils.js';
+
 /**
- * @param {Required<Pick<import('../index.js').Options, "typescript">>} options
+ * @param {Required<Pick<import('../index.js').Options, "typescript">> & { fileRoots?: string[] }} options
  * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
-export const jsdocConfig = async ({ typescript }) => {
+export const jsdocConfig = async ({ fileRoots, typescript }) => {
   const { default: jsdoc } = await import('eslint-plugin-jsdoc');
   /** @type {import('../index.js').FlatConfig[]} */
   const configs = [
     {
-      files: ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'],
+      files: filesFactory(['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'], fileRoots),
       plugins: {
         jsdoc
       },
@@ -46,7 +48,7 @@ export const jsdocConfig = async ({ typescript }) => {
   ];
   if (typescript.enabled) {
     configs.push({
-      files: ['**/*.ts', '**/*.tsx'],
+      files: filesFactory(['**/*.ts', '**/*.tsx'], fileRoots),
       rules: {
         'jsdoc/check-tag-names': [
           'warn',

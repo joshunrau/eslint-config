@@ -1,15 +1,17 @@
+import { filesFactory } from '../utils.js';
+
 /**
- * @param {Required<Pick<import('../index.js').Options, "json">>} options
+ * @param {Required<Pick<import('../index.js').Options, "json">> & { fileRoots?: string[] }} options
  * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
-export const jsonConfig = async ({ json }) => {
+export const jsonConfig = async ({ fileRoots, json }) => {
   const { default: plugin } = await import('eslint-plugin-jsonc');
   const { default: parser } = await import('jsonc-eslint-parser');
   /** @type {import('../index.js').FlatConfig[]} */
   const configs = [];
   if (json.sort.packageJson) {
     configs.push({
-      files: ['**/package.json'],
+      files: filesFactory(['**/package.json'], fileRoots),
       languageOptions: {
         parser
       },
@@ -95,7 +97,7 @@ export const jsonConfig = async ({ json }) => {
   }
   if (json.sort.tsconfig) {
     configs.push({
-      files: ['**/jsconfig.json', '**/tsconfig.json', '**/tsconfig.*.json'],
+      files: filesFactory(['**/jsconfig.json', '**/tsconfig.json', '**/tsconfig.*.json'], fileRoots),
       rules: {
         'jsonc/sort-keys': [
           'warn',

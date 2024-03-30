@@ -1,16 +1,18 @@
+import { filesFactory } from '../utils.js';
+
 /**
- * @param {Required<Pick<import('../index.js').Options, "env" | "exclude">>} options
+ * @param {Required<Pick<import('../index.js').Options, "env" | "exclude">> & { fileRoots?: string[] }} options
  * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
-export const baseConfig = async ({ env, exclude }) => {
+export const baseConfig = async ({ env, exclude, fileRoots }) => {
   const { default: js } = await import('@eslint/js');
   const { default: globals } = await import('globals');
   return [
     {
-      ignores: ['**/build', '**/dist', '**/node_modules', ...exclude]
+      ignores: ['**/.astro/*', '**/build', '**/dist', '**/node_modules', ...exclude]
     },
     {
-      files: ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'],
+      files: filesFactory(['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'], fileRoots),
       languageOptions: {
         ecmaVersion: 'latest',
         globals: {
@@ -26,7 +28,7 @@ export const baseConfig = async ({ env, exclude }) => {
       }
     },
     {
-      files: ['**/*.cjs'],
+      files: filesFactory(['**/*.cjs'], fileRoots),
       languageOptions: {
         globals: {
           ...globals.commonjs,
