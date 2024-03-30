@@ -63,5 +63,15 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release": {
+    "extends": [
+      "@joshunrau/semantic-release"
+    ]
   }
 }
