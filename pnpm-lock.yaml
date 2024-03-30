@@ -28,6 +28,9 @@ dependencies:
     version: 7.1.0(eslint@8.57.0)(typescript@5.3.3)
 
 devDependencies:
+  '@joshunrau/prettier-config':
+    specifier: ^0.1.1
+    version: 0.1.1(prettier@3.2.5)
   '@types/eslint':
     specifier: ^8.56.5
     version: 8.56.5
@@ -44,7 +47,7 @@ devDependencies:
     specifier: ^3.2.5
     version: 3.2.5
   typescript:
-    specifier: ^5.3.3
+    specifier: ~5.3.3
     version: 5.3.3
 
 packages:
@@ -118,6 +121,21 @@ packages:
 
   /@humanwhocodes/object-schema@2.0.2:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
+
+  /@joshunrau/prettier-config@0.1.1(prettier@3.2.5):
+    resolution: {integrity: sha512-lXdKOOqGCKT7uOTNhWIHb2iZp2wEZdOGcTZPh00VN7Mt4QY4tKVwWTU8zapylP7ZSmGod/U9EeRAPyPR8Om8oQ==}
+    peerDependencies:
+      prettier: ^3.2.5
+      prettier-plugin-astro: ^0.13.0
+      prettier-plugin-tailwindcss: ^0.5.13
+    peerDependenciesMeta:
+      prettier-plugin-astro:
+        optional: true
+      prettier-plugin-tailwindcss:
+        optional: true
+    dependencies:
+      prettier: 3.2.5
+    dev: true
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

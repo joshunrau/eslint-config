@@ -1,6 +1,6 @@
-/** @type {import("prettier").Options} */
-export default {
-  printWidth: 120,
-  singleQuote: true,
-  trailingComma: 'none'
-};
+import { createConfig } from '@joshunrau/prettier-config';
+
+export default createConfig({
+  astro: false,
+  tailwindcss: false
+});
