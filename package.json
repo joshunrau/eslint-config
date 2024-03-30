@@ -27,7 +27,8 @@
   "scripts": {
     "build:lib": "tsc",
     "format": "prettier --write src",
-    "lint": "pnpm exec tsc --noEmit --emitDeclarationOnly false && eslint --fix src"
+    "lint": "pnpm exec tsc --noEmit --emitDeclarationOnly false && eslint --fix src",
+    "prepare": "husky"
   },
   "peerDependencies": {
     "eslint": "8.x",
@@ -48,11 +49,15 @@
     "typescript-eslint": "^7.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
     "@joshunrau/prettier-config": "^0.1.1",
+    "@joshunrau/semantic-release": "^0.1.0",
     "@types/eslint": "^8.56.5",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.11.24",
     "eslint": "^8.57.0",
+    "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "typescript": "~5.3.3"
   },
