@@ -3,45 +3,38 @@
  * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
 export const baseConfig = async ({ env, exclude }) => {
-  const { default: js } = await import("@eslint/js");
-  const { default: globals } = await import("globals");
+  const { default: js } = await import('@eslint/js');
+  const { default: globals } = await import('globals');
   return [
     {
-      ignores: ["**/build", "**/dist", "**/node_modules", ...exclude],
+      ignores: ['**/build', '**/dist', '**/node_modules', ...exclude]
     },
     {
-      files: [
-        "**/*.js",
-        "**/*.jsx",
-        "**/*.cjs",
-        "**/*.mjs",
-        "**/*.ts",
-        "**/*.tsx",
-      ],
+      files: ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs', '**/*.ts', '**/*.tsx'],
       languageOptions: {
-        ecmaVersion: "latest",
+        ecmaVersion: 'latest',
         globals: {
           ...(env.browser ? globals.browser : null),
           ...(env.es2021 ? globals.es2021 : null),
-          ...(env.node ? globals.node : null),
+          ...(env.node ? globals.node : null)
         },
-        sourceType: "module",
+        sourceType: 'module'
       },
       rules: {
         ...js.configs.recommended.rules,
-        "no-alert": "error",
-      },
+        'no-alert': 'error'
+      }
     },
     {
-      files: ["**/*.cjs"],
+      files: ['**/*.cjs'],
       languageOptions: {
         globals: {
           ...globals.commonjs,
           ...globals.node,
-          ...(env.es2021 ? globals.es2021 : null),
+          ...(env.es2021 ? globals.es2021 : null)
         },
-        sourceType: "commonjs",
-      },
-    },
+        sourceType: 'commonjs'
+      }
+    }
   ];
 };

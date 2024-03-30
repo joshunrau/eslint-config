@@ -1,9 +1,9 @@
-import { baseConfig } from "./configs/base.js";
-import { jsdocConfig } from "./configs/jsdoc.js";
-import { jsonConfig } from "./configs/json.js";
-import { perfectionistConfig } from "./configs/perfectionist.js";
-import { reactConfig } from "./configs/react.js";
-import { typescriptConfig } from "./configs/typescript.js";
+import { baseConfig } from './configs/base.js';
+import { jsdocConfig } from './configs/jsdoc.js';
+import { jsonConfig } from './configs/json.js';
+import { perfectionistConfig } from './configs/perfectionist.js';
+import { reactConfig } from './configs/react.js';
+import { typescriptConfig } from './configs/typescript.js';
 
 /** @typedef {import('eslint').Linter.FlatConfig} FlatConfig */
 
@@ -42,7 +42,7 @@ export const config = async ({
   json = { enabled: true, sort: { packageJson: true, tsconfig: true } },
   perfectionist = { enabled: true },
   react = { enabled: false },
-  typescript = { enabled: true },
+  typescript = { enabled: true }
 } = {}) => {
   /** @type {FlatConfig[][]} */
   const items = [];

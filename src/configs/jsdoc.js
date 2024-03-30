@@ -48,13 +48,16 @@ export const jsdocConfig = async ({ typescript }) => {
     configs.push({
       files: ['**/*.ts', '**/*.tsx'],
       rules: {
-      'jsdoc/check-tag-names': ['warn', {
-        typed: true
-      }],
-      'jsdoc/no-types': 'warn',
-      'jsdoc/require-param-type': 'off',
-      'jsdoc/require-property-type': 'off',
-      'jsdoc/require-returns-type': 'off'
+        'jsdoc/check-tag-names': [
+          'warn',
+          {
+            typed: true
+          }
+        ],
+        'jsdoc/no-types': 'warn',
+        'jsdoc/require-param-type': 'off',
+        'jsdoc/require-property-type': 'off',
+        'jsdoc/require-returns-type': 'off'
       }
     });
   }
