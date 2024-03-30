@@ -6,7 +6,7 @@
   "description": "ESLint Config",
   "author": "Joshua Unrau",
   "license": "MIT",
-  "homepage": "https://github.com/joshunrau/eslint-config/#readme",
+  "homepage": "https://github.com/joshunrau/eslint-config#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/joshunrau/eslint-config.git"
