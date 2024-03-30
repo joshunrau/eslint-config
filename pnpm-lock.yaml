@@ -40,6 +40,9 @@ devDependencies:
   '@joshunrau/semantic-release':
     specifier: ^0.1.0
     version: 0.1.0(@commitlint/cli@19.2.1)(@commitlint/config-conventional@19.1.0)(husky@9.0.11)(typescript@5.4.3)
+  '@joshunrau/tsconfig':
+    specifier: ^0.0.2
+    version: 0.0.2(typescript@5.4.3)
   '@types/eslint':
     specifier: ^8.56.6
     version: 8.56.6
@@ -407,6 +410,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - typescript
+    dev: true
+
+  /@joshunrau/tsconfig@0.0.2(typescript@5.4.3):
+    resolution:
+      { integrity: sha512-NeczwX1DXsGi4LbYD2KMdb8Ph7kexLy3yvOEh6iWf6/AO4mYwgOWcDI5gHLlfqcjq4Re3cZBlBLGmqXhwNYwLA== }
+    peerDependencies:
+      typescript: ^5.4.3
+    dependencies:
+      typescript: 5.4.3
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:

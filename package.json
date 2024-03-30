@@ -53,6 +53,7 @@
     "@commitlint/config-conventional": "^19.1.0",
     "@joshunrau/prettier-config": "^0.2.1",
     "@joshunrau/semantic-release": "^0.1.0",
+    "@joshunrau/tsconfig": "^0.0.2",
     "@types/eslint": "^8.56.6",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.12.2",
