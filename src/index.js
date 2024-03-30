@@ -64,3 +64,5 @@ export const config = async ({
   }
   return items.flat();
 };
+
+export default config();
