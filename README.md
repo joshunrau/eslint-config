@@ -15,6 +15,7 @@ import { config } from '@joshunrau/eslint-config';
 
 // These are the defaults, override as needed depending on project
 export default config({
+  astro: { enabled: false },
   env: { browser: true, es2021: true, node: true },
   exclude: [],
   jsdoc: { enabled: false },
