@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.1](https://github.com/joshunrau/eslint-config/compare/v4.3.0...v4.3.1) (2024-06-30)
+
+
+### Bug Fixes
+
+* migrate typescript rules for v8 ([4131156](https://github.com/joshunrau/eslint-config/commit/41311563e01bf66d44b3f3e620a03072a41b646d))
+
 ## [4.3.0](https://github.com/joshunrau/eslint-config/compare/v4.2.1...v4.3.0) (2024-06-30)
 
 
