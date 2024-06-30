@@ -60,7 +60,7 @@ export const config = async (
   const items = [];
   items.push(baseConfig({ env, exclude, fileRoots }));
   if (astro.enabled) {
-    items.push(astroConfig({ fileRoots, typescript }));
+    items.push(astroConfig({ fileRoots }));
   }
   if (jsdoc.enabled) {
     items.push(jsdocConfig({ fileRoots, typescript }));
