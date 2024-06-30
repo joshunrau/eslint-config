@@ -33,7 +33,6 @@ export const typescriptConfig = async ({ fileRoots, react }) => {
         '@typescript-eslint/array-type': 'error',
         '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/ban-ts-comment': 'error',
-        '@typescript-eslint/ban-types': 'error',
         '@typescript-eslint/class-literal-property-style': 'error',
         '@typescript-eslint/consistent-generic-constructors': 'error',
         '@typescript-eslint/consistent-indexed-object-style': ['error', 'index-signature'],
