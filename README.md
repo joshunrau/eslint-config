@@ -22,6 +22,7 @@ export default config({
   json: { enabled: true, sort: { packageJson: true, tsconfig: true } },
   perfectionist: { enabled: true },
   react: { enabled: false },
+  svelte = { enabled: false },
   typescript: { enabled: true }
 });
 
