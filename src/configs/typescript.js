@@ -1,17 +1,14 @@
 import { filesFactory } from '../utils.js';
 
 /**
- * @param {Required<Pick<import('../index.js').Options, "react" | "svelte">> & { fileRoots?: string[] }} options
+ * @param {Required<Pick<import('../index.js').Options, "react">> & { fileRoots?: string[] }} options
  * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
-export const typescriptConfig = async ({ fileRoots, react, svelte }) => {
+export const typescriptConfig = async ({ fileRoots, react }) => {
   const { parser, plugin } = await import('typescript-eslint');
   const extensions = ['.ts'];
   if (react.enabled) {
     extensions.push('.tsx');
-  }
-  if (svelte.enabled) {
-    extensions.push('.svelte');
   }
   const files = extensions.map((ext) => '**/*' + ext);
   const testFiles = extensions.flatMap((ext) => ['**/*.test' + ext, '**/*.spec' + ext]);
@@ -23,7 +20,6 @@ export const typescriptConfig = async ({ fileRoots, react, svelte }) => {
         // @ts-ignore
         parser,
         parserOptions: {
-          extraFileExtensions: svelte.enabled ? ['.svelte'] : undefined,
           project: true,
           sourceType: 'module'
         }
