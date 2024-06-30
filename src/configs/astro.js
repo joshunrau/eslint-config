@@ -1,4 +1,4 @@
-import { filesFactory } from '../utils.js';
+import { applyFilesFactory, filesFactory } from '../utils.js';
 
 /**
  * @param {{ fileRoots?: string[] }} options
@@ -7,13 +7,7 @@ import { filesFactory } from '../utils.js';
 export const astroConfig = async ({ fileRoots }) => {
   const { default: astroPlugin } = await import('eslint-plugin-astro');
   return [
-    ...astroPlugin.configs.recommended.map((config) => {
-      const files = /** @type {string[] | undefined} */ (config.files);
-      if (!files) {
-        return config;
-      }
-      return { ...config, files: filesFactory(files, fileRoots) };
-    }),
+    ...applyFilesFactory(astroPlugin.configs.recommended, fileRoots),
     {
       files: filesFactory(['**/*.astro'], fileRoots),
       rules: {
