@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.2](https://github.com/joshunrau/eslint-config/compare/v4.3.1...v4.3.2) (2024-06-30)
+
+
+### Bug Fixes
+
+* remove @typescript-eslint/ban-types ([5c81bab](https://github.com/joshunrau/eslint-config/commit/5c81babc009b1f65ca3353c3a17f1858c7d05446))
+
 ## [4.3.1](https://github.com/joshunrau/eslint-config/compare/v4.3.0...v4.3.1) (2024-06-30)
 
 
