@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.3.0](https://github.com/joshunrau/eslint-config/compare/v4.2.1...v4.3.0) (2024-06-30)
+
+
+### Features
+
+* add svelte support ([5eaaf34](https://github.com/joshunrau/eslint-config/commit/5eaaf34d7adf90a05d11c4101685b6e36cdfb79c))
+
+
+### Bug Fixes
+
+* migrate eslint-plugin-astro to v1 ([f070b55](https://github.com/joshunrau/eslint-config/commit/f070b55cdf88880dfeabb001121129c4a8d0d851))
+
 ## [4.2.0](https://github.com/joshunrau/eslint-config/compare/v4.1.0...v4.2.0) (2024-03-30)
 
 
