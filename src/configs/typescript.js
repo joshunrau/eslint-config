@@ -1,10 +1,10 @@
 import { filesFactory } from '../utils.js';
 
 /**
- * @param {Required<Pick<import('../index.js').Options, "react">> & { fileRoots?: string[] }} options
+ * @param {Required<Pick<import('../index.js').Options, "react" | "svelte">> & { fileRoots?: string[] }} options
  * @returns {Promise<import('../index.js').FlatConfig[]>}
  */
-export const typescriptConfig = async ({ fileRoots, react }) => {
+export const typescriptConfig = async ({ fileRoots, react, svelte }) => {
   const { parser, plugin } = await import('typescript-eslint');
   const extensions = ['.ts'];
   if (react.enabled) {
@@ -85,7 +85,7 @@ export const typescriptConfig = async ({ fileRoots, react }) => {
         ],
         '@typescript-eslint/no-wrapper-object-types': 'error',
         '@typescript-eslint/non-nullable-type-assertion-style': 'error',
-        '@typescript-eslint/only-throw-error': 'error',
+        '@typescript-eslint/only-throw-error': svelte.enabled ? 'off' : 'error',
         '@typescript-eslint/prefer-as-const': 'error',
         '@typescript-eslint/prefer-find': 'error',
         '@typescript-eslint/prefer-for-of': 'error',

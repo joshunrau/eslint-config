@@ -82,7 +82,7 @@ export const config = async (
     items.push(svelteConfig({ fileRoots }));
   }
   if (typescript.enabled) {
-    items.push(typescriptConfig({ fileRoots, react }));
+    items.push(typescriptConfig({ fileRoots, react, svelte }));
   }
   items.push(...args);
   return (await Promise.all(items)).flat();
