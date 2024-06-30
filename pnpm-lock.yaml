@@ -32,7 +32,7 @@ importers:
         specifier: ^15.7.0
         version: 15.7.0
       typescript-eslint:
-        specifier: ^8.0.0-alpha.20
+        specifier: 8.0.0-alpha.37
         version: 8.0.0-alpha.37(eslint@8.57.0)(typescript@5.5.2)
     devDependencies:
       '@commitlint/cli':
