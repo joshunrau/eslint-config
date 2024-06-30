@@ -4,6 +4,7 @@ import { jsdocConfig } from './configs/jsdoc.js';
 import { jsonConfig } from './configs/json.js';
 import { perfectionistConfig } from './configs/perfectionist.js';
 import { reactConfig } from './configs/react.js';
+import { svelteConfig } from './configs/svelte.js';
 import { typescriptConfig } from './configs/typescript.js';
 
 /** @typedef {import('eslint').Linter.FlatConfig} FlatConfig */
@@ -32,6 +33,8 @@ import { typescriptConfig } from './configs/typescript.js';
  * @property {object} [react]
  * @property {boolean} react.enabled
  * @property {string} [react.version]
+ * @property {object} [svelte]
+ * @property {boolean} svelte.enabled
  * @property {object} [typescript]
  * @property {boolean} typescript.enabled
  */
@@ -52,6 +55,7 @@ export const config = async (
     json = { enabled: true, sort: { packageJson: true, tsconfig: true } },
     perfectionist = { enabled: true },
     react = { enabled: false, version: 'detect' },
+    svelte = { enabled: false },
     typescript = { enabled: true }
   } = {},
   ...args
@@ -74,8 +78,11 @@ export const config = async (
   if (react.enabled) {
     items.push(reactConfig({ fileRoots, react, typescript }));
   }
+  if (svelte.enabled) {
+    items.push(svelteConfig({ fileRoots }));
+  }
   if (typescript.enabled) {
-    items.push(typescriptConfig({ fileRoots, react }));
+    items.push(typescriptConfig({ fileRoots, react, svelte }));
   }
   items.push(...args);
   return (await Promise.all(items)).flat();
