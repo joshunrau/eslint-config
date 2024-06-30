@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.3](https://github.com/joshunrau/eslint-config/compare/v4.3.2...v4.3.3) (2024-06-30)
+
+
+### Bug Fixes
+
+* allow throwing non-errors with svelte ([4c75c4e](https://github.com/joshunrau/eslint-config/commit/4c75c4e766e2e9744fead7ba50ed4fc71fdb628c))
+
 ## [4.3.2](https://github.com/joshunrau/eslint-config/compare/v4.3.1...v4.3.2) (2024-06-30)
 
 
